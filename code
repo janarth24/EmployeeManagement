@@ -1,0 +1,86 @@
+import java.util.*;
+class Department {
+    private String name;
+
+    public Department(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+}
+class Employee {
+    private String name;
+    private int id;
+    private double salary;
+    private int yearsOfService;
+    private Department department;
+
+    public Employee(String name, int id, double salary, int yearsOfService, Department department) {
+        this.name = name;
+        this.id = id;
+        this.salary = salary;
+        this.yearsOfService = yearsOfService;
+        this.department = department;
+    }
+
+    public double calculateSalary() {
+        return salary;
+    }
+
+    public boolean isEligibleForPromotion() {
+        return yearsOfService > 5;
+    }
+
+    public void displayDetails() {
+        System.out.println("Name: " + name + " | ID: " + id + " | Dept: " + department.getName() + " | Salary: $" + salary);
+    }
+}
+
+
+class FullTimeEmployee extends Employee implements Promotable {
+    public FullTimeEmployee(String name, int id, double salary, int yearsOfService, Department department) {
+        super(name, id, salary, yearsOfService, department);
+    }
+
+   
+    private String getName() {
+        return this.getClass().getSuperclass().getName();
+    }
+}
+
+
+public class EmployeeManagement {
+    public static void main(String[] args) {
+    
+        Scanner scanner = new Scanner(System.in);
+
+        
+        System.out.print("enter department name: ");
+        String deptName = scanner.nextLine();
+        Department department = new Department(deptName);
+
+        
+        System.out.print("enter employee type (fulltime/parttime): ");
+        String type = scanner.nextLine();
+
+        System.out.print("enter employee name: ");
+        String name = scanner.nextLine();
+
+        System.out.print("enter employee ID: ");
+        int id = scanner.nextInt();
+
+        System.out.print("enter years of service: ");
+        int yearsOfService = scanner.nextInt();
+
+        Employee employee;
+        System.out.print("Enter salary: ");
+        double salary = scanner.nextDouble();
+        employee = new FullTimeEmployee(name, id, salary, yearsOfService, department);
+
+        
+        employee.displayDetails();
+    }
+
+}
